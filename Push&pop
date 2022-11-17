@@ -1,0 +1,60 @@
+#include <stdio.h>
+#include <stdlib.h>
+#define STACK_SIZE 5
+int item,top,st[10];
+void push(){
+    if(top==STACK_SIZE-1){
+        printf("\nSTACK OVERFLOW\n");
+    }
+    else{
+        top++;
+        st[top]=item;
+    }
+}
+void pop(){
+    int del_item;
+    if(top==-1){
+        printf("\nSTACK UNDERFLOW\n");
+    }
+    else{
+        del_item=st[top];
+        top--;
+        printf("\ndeleted item is %d\n",del_item);
+    }
+}
+void display(){
+    int i;
+    if (top==-1){
+        printf("\nEMPTY\n");
+    }
+    else{
+        for(i=0; i<=top; i++){
+            printf("%d\n",st[i]);
+        }
+    }
+}
+void main(){
+    int x;
+    top=-1;
+    while(1)
+    {
+        printf("following operations can be done:\n");
+        printf("1 for push\n 2 for pop\n 3 for display\n");
+        scanf("%d",&x);
+        switch(x){
+            case 1:
+            printf("\nEnter value to be pushed: \n");
+            scanf("%d",&item);
+            push();
+            break;
+            case 2:
+            pop();
+            break;
+            case 3:
+            display();
+            break;
+            default:exit(0);
+        }
+    }
+}
+
