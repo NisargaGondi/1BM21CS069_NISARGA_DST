@@ -1,0 +1,60 @@
+#include<stdio.h>
+#include<stdlib.h>
+#define Stack_size 10
+void push(int st[],int*top,int item)
+{
+	if(*top==Stack_size - 1)
+		printf("Stack Overflow \n");
+	else
+	{
+		(*top)++;
+		st[*top] = item;
+	}
+}
+
+int pop(int st[],int*top)
+{
+	int item_deleted;
+		if(*top==-1)
+			printf("Stack Underflow \n");
+		else
+		{
+			item_deleted = st[*top];
+			(*top)--;
+			return item_deleted;
+			
+		}
+}
+
+void display(int st[],int*top)
+{
+	int i;
+	if(*top == -1)
+		printf("Stack is empty\n");
+    for(i=0; i <=*top;i++)
+        printf("%d \n", st[i]);
+}
+
+void main()
+{   int st[Stack_size ];
+    int item,top=-1,ch,value_deleted;
+    while(1)
+    {
+        printf("Enter the option you want to choose \n 1. To insert a element \n 2. To remove an element \n 3. To display the elements \n 4. Exit\n ");
+        scanf("%d",&ch);
+        switch(ch)
+        {
+            case 1: printf("Enter the element you want to add\n");
+                    scanf("%d",&item);
+                    push(st,&top,item);
+                    break;
+            case 2: value_deleted=pop(st,&top);
+                    printf("item_deleted=%d \n",value_deleted);
+                    break;
+            case 3: display(st,&top);
+                    break;
+            default:exit(0);
+                    
+        }
+    }
+}
