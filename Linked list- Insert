@@ -1,0 +1,163 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+struct node{
+    int data;
+    struct node* next;
+};
+
+struct node* head = NULL;
+
+struct node* create_node();
+void add_front();
+void add_end();
+void add_between(int pos);
+void delete_front();
+void delete_end();
+void delete_position(int pos);
+void display();
+
+void main(){
+    int choice;
+    printf("1.Adding element in beginning\n2.Adding element at end\n3.Adding element at specified position\n4.Display\n5.Exit\n");
+    while (1)
+    {
+         printf("Enter choice\n");
+        scanf("%d",&choice);
+        switch (choice)
+        {
+        case 1:
+            add_front();
+            break;
+
+        case 2:
+            add_end();
+            break;
+
+        case 3:
+            printf("Enter position of element to be inserted\n");
+            int p;
+            scanf("%d",&p);
+            if(p<=0){
+                printf("Not a valid position\n");
+           break;
+           }
+            add_between(p);
+            break;
+
+        case 4:
+            display();
+            break;
+
+        case 5:
+            exit(0);
+
+        default:printf("invalid choice");
+            break;
+        }
+    }
+}
+
+struct node* create_node(){
+    struct node* temp=(struct node*)malloc(sizeof(struct node));
+    printf("Enter integer\n");
+    scanf("%d",&(temp->data));
+    temp->next=NULL;
+    return temp;
+}
+
+void add_front(){
+    if(head==NULL){
+        head=create_node();
+    }else{
+        struct node* temp=create_node();
+        temp->next=head;
+        head=temp;
+    }
+}
+
+void add_end(){
+    if(head==NULL){
+        head=create_node();
+    }else{
+        struct node* temp=head;
+        while(temp->next!=NULL)
+        temp=temp->next;
+        temp->next=create_node();
+    }
+}
+
+void add_between(int pos){
+    if(head==NULL){
+        printf("No previous elements exist.New list being created\n");
+        head=create_node();
+    }else if(pos==1){
+        add_front();
+        }else{
+        struct node* temp=head;
+        while(--pos!=1){
+        temp=temp->next;
+        if(temp->next==NULL){
+            printf("List isn't long enough\n");
+            break;
+        }
+        }
+        if(pos==1){
+        struct node* temp1=temp->next;
+        temp->next=create_node();
+        (temp->next)->next=temp1;
+        }
+    }
+}
+
+void display(){
+    if(head==NULL){
+        printf("No elements have been inserted");
+    }else{
+    struct node* i=head;
+    while (i->next!=NULL)
+    {
+        printf("%d  ",i->data);
+        i=i->next;
+    }
+    printf("%d  ",i->data);
+    printf("\n");
+    }
+}
+
+void delete_front(){
+if(head==NULL){
+    printf("Nothing to delete\n");
+}else{
+struct node* temp=head;
+head=temp->next;
+free(temp);
+}
+}
+
+void delete_end(){
+if(head==NULL){
+    printf("Nothing to delete\n");
+}else{
+struct node* temp=head;
+while((temp->next)->next!=NULL)
+    temp=temp->next;
+free(temp->next);
+}
+}
+
+void delete_position(int pos){
+if(head==NULL){
+    printf("Nothing to delete\n");
+}else{
+struct node* temp=head;
+while(--pos!=1){
+    temp=temp->next;
+    if((temp->next)==NULL){
+        printf("Invalid position\n");
+        break;
+    }
+}
+  (temp->next)->next
+}
+}
